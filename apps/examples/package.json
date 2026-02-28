@@ -1,0 +1,14 @@
+{
+  "name": "@ffmpeg-oneclick/examples",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "basic": "node basic-usage.js",
+    "progress": "node progress-tracking.js",
+    "filters": "node video-filters.js"
+  },
+  "dependencies": {
+    "@ffmpeg-oneclick/core": "^0.1.0"
+  }
+}

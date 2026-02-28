@@ -1,0 +1,67 @@
+{
+  "name": "@ffmpeg-oneclick/core",
+  "version": "0.1.0",
+  "description": "Core library for ffmpeg-oneclick",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist *.tsbuildinfo coverage"
+  },
+  "keywords": [
+    "ffmpeg",
+    "video",
+    "audio",
+    "transcode"
+  ],
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "execa": "^8.0.1",
+    "p-event": "^6.0.0",
+    "proper-lockfile": "^4.1.2",
+    "semver": "^7.6.0"
+  },
+  "peerDependencies": {
+    "@ffmpeg-oneclick/bin": ">=0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@ffmpeg-oneclick/bin": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/proper-lockfile": "^4.1.4",
+    "@types/semver": "^7.5.8",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

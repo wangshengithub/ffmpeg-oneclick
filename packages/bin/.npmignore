@@ -1,0 +1,24 @@
+# Dependencies
+node_modules
+
+# Build artifacts
+*.tsbuildinfo
+
+# Test
+test
+*.test.ts
+*.spec.ts
+
+# Development
+.vscode
+.idea
+*.log
+
+# Source (keep dist and binaries for publishing)
+src
+
+# Config
+tsconfig.json
+tsup.config.ts
+.eslintrc.cjs
+.prettierrc
