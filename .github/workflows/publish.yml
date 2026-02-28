@@ -34,11 +34,11 @@ jobs:
       - name: Publish core package
         run: npm publish --access public --provenance
         working-directory: ./packages/core
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish bin package
         run: npm publish --access public --provenance
         working-directory: ./packages/bin
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish cli package
+        run: npm publish --access public --provenance
+        working-directory: ./packages/cli
