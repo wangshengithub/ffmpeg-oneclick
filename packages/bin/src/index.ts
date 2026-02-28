@@ -590,7 +590,9 @@ export async function downloadFFmpeg(options: DownloadOptions = {}): Promise<str
 
     // 清理并解压文件
     cleanExtractDir(extractDir);
-    await extractFile(archivePath, extractDir);
+    // 将相对路径转换为绝对路径，因为 extract-zip 要求绝对路径
+    const absoluteExtractDir = resolve(extractDir);
+    await extractFile(archivePath, absoluteExtractDir);
 
     if (onProgress) {
       onProgress(85); // 解压占 85%
