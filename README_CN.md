@@ -29,6 +29,82 @@ yarn add @ffmpeg-oneclick/core @ffmpeg-oneclick/bin
 pnpm add @ffmpeg-oneclick/core @ffmpeg-oneclick/bin
 ```
 
+## ⚠️ 故障排除
+
+### FFmpeg 下载失败
+
+**问题：** FFmpeg 自动下载时出现 SSL 证书错误：
+
+```
+Error: unable to verify the first certificate
+```
+
+**解决方案：** 设置 `NODE_TLS_REJECT_UNAUTHORIZED=0` 环境变量：
+
+**Windows (PowerShell):**
+
+```powershell
+$env:NODE_TLS_REJECT_UNAUTHORIZED=0
+node your-app.js
+```
+
+**Windows (CMD):**
+
+```cmd
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+node your-app.js
+```
+
+**Linux/macOS:**
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 node your-app.js
+```
+
+**或在代码中设置（在导入库之前）：**
+
+```javascript
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import { ffmpeg } from '@ffmpeg-oneclick/core';
+```
+
+**注意：** 这是在严格防火墙/代理环境下的临时解决方案。FFmpeg 二进制文件只会下载一次并缓存到本地，所以您只需要设置一次。
+
+### 手动安装 FFmpeg
+
+如果自动下载持续失败，您可以手动安装 FFmpeg：
+
+1. 从以下地址下载 FFmpeg：
+   - Windows: https://www.gyan.dev/ffmpeg/builds/
+   - 其他平台: https://ffmpeg.org/download.html
+2. 解压到任意目录
+3. 手动设置路径：
+   
+   ```javascript
+   import { FFmpegWrapper } from '@ffmpeg-oneclick/core';
+   ```
+
+const ffmpeg = new FFmpegWrapper({
+  ffmpegPath: '/path/to/ffmpeg',
+  ffprobePath: '/path/to/ffprobe'
+});
+
+```
+### 手动指定 FFmpeg 路径（可选）
+
+如果您已经安装了 FFmpeg 或想使用自定义版本：
+
+```typescript
+import { FFmpegWrapper } from '@ffmpeg-oneclick/core';
+
+const ffmpeg = new FFmpegWrapper({
+  ffmpegPath: '/path/to/ffmpeg',
+  ffprobePath: '/path/to/ffprobe'
+});
+```
+
+---
+
 ## 🚀 快速开始
 
 ### 基础转换

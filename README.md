@@ -31,6 +31,146 @@ yarn add @ffmpeg-oneclick/core @ffmpeg-oneclick/bin
 pnpm add @ffmpeg-oneclick/core @ffmpeg-oneclick/bin
 ```
 
+## ⚠️ Troubleshooting
+
+### FFmpeg Download Issues
+
+**Problem:** FFmpeg download fails with SSL certificate error:
+```
+Error: unable to verify the first certificate
+```
+
+**Solution:** Set the `NODE_TLS_REJECT_UNAUTHORIZED=0` environment variable before running your application:
+
+**Windows (PowerShell):**
+```powershell
+$env:NODE_TLS_REJECT_UNAUTHORIZED=0
+node your-app.js
+```
+
+**Windows (CMD):**
+```cmd
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+node your-app.js
+```
+
+**Linux/macOS:**
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 node your-app.js
+```
+
+**Or in your code (before importing):**
+```javascript
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import { ffmpeg } from '@ffmpeg-oneclick/core';
+```
+
+**Note:** This is a temporary workaround for networks with strict firewall/proxy settings. The FFmpeg binary is only downloaded once and cached locally, so you only need to do this once.
+
+### Manual FFmpeg Installation
+
+If automatic download continues to fail, you can manually install FFmpeg:
+
+1. Download FFmpeg from: https://www.gyan.dev/ffmpeg/builds/ (Windows) or https://ffmpeg.org/download.html (other platforms)
+2. Extract to any directory
+3. Set the path manually:
+```javascript
+import { FFmpegWrapper } from '@ffmpeg-oneclick/core';
+
+const ffmpeg = new FFmpegWrapper({
+  ffmpegPath: '/path/to/ffmpeg',
+  ffprobePath: '/path/to/ffprobe'
+});
+```
+
+### Manual FFmpeg Path (Optional)
+
+If you have FFmpeg already installed or want to use a custom version:
+
+```typescript
+import { FFmpegWrapper } from '@ffmpeg-oneclick/core';
+
+const ffmpeg = new FFmpegWrapper({
+  ffmpegPath: '/path/to/ffmpeg',
+  ffprobePath: '/path/to/ffprobe'
+});
+```
+
+## ⚠️ Troubleshooting
+
+### SSL Certificate Error
+
+If you encounter SSL certificate verification errors during automatic FFmpeg download:
+
+**Error message:**
+```
+Error: unable to verify the first certificate
+```
+
+**Solutions:**
+
+**Option 1: Disable SSL verification (Temporary)**
+```bash
+# Linux/macOS
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+
+# Windows PowerShell
+$env:NODE_TLS_REJECT_UNAUTHORIZED="0"
+
+# Windows CMD
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+```
+
+**Option 2: Use system FFmpeg**
+
+Install FFmpeg on your system and use the system version:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install ffmpeg
+
+# macOS
+brew install ffmpeg
+
+# Windows (using Chocolatey)
+choco install ffmpeg
+```
+
+Then configure in code:
+```typescript
+import { FFmpegWrapper } from '@ffmpeg-oneclick/core';
+
+const ffmpeg = new FFmpegWrapper({
+  ffmpegPath: 'ffmpeg',  // Uses system PATH
+  ffprobePath: 'ffprobe'
+});
+```
+
+**Option 3: Manual Download**
+
+1. Download FFmpeg from: https://github.com/BtbN/FFmpeg-Builds/releases
+2. Extract to a folder
+3. Configure the path in your code
+
+### Other Common Issues
+
+**Problem: FFmpeg binary not found**
+
+Solution: Ensure `@ffmpeg-oneclick/bin` is installed:
+```bash
+npm install @ffmpeg-oneclick/bin
+```
+
+**Problem: Permission denied**
+
+Solution: Ensure FFmpeg binary has execute permission:
+```bash
+# Linux/macOS
+chmod +x node_modules/@ffmpeg-oneclick/bin/binaries/ffmpeg
+```
+
+---
+
 ## 🚀 Quick Start
 
 ### Basic Conversion
