@@ -9,7 +9,7 @@ const program = new Command();
 program
   .name('ffmpeg-oneclick')
   .description('One-click FFmpeg - Simple, Fast, Complete')
-  .version('0.1.4');
+  .version('0.1.5');
 
 // 转换命令
 program
