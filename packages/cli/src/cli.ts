@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Command } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -11,7 +9,7 @@ const program = new Command();
 program
   .name('ffmpeg-oneclick')
   .description('One-click FFmpeg - Simple, Fast, Complete')
-  .version('0.1.0');
+  .version('0.1.4');
 
 // 转换命令
 program
