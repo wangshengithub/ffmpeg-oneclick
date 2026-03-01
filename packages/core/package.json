@@ -1,6 +1,6 @@
 {
   "name": "@ffmpeg-oneclick/core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Core library for ffmpeg-oneclick",
   "type": "module",
   "main": "./dist/index.cjs",

@@ -9,16 +9,16 @@ export default defineConfig([
     sourcemap: true,
     clean: true,
     minify: false,
-    // 添加 ESM 兼容性支持
+    // 添加 ESM 兼容性支持（使用下划线前缀避免变量名冲突）
     esbuildOptions(options) {
       options.banner = {
         js: `
 import { createRequire } from 'module';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath as _urlToFile } from 'url';
+import { dirname as _getDirname } from 'path';
 const require = createRequire(import.meta.url);
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = _urlToFile(import.meta.url);
+const __dirname = _getDirname(_urlToFile(import.meta.url));
         `.trim(),
       };
     },
